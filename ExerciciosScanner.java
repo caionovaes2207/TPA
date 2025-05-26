@@ -12,134 +12,140 @@ import java.util.Scanner;
 public class ExerciciosScanner {
 
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in); 
+        Scanner scanner = new Scanner(System.in); 
         int opcao; 
+        String continuar;
+        
+ //EXERCICIO 1 - CALCULADORA SIMPLES
+  
+        System.out.println("1 - Soma");
+        System.out.println("2 - Subtração");
+        System.out.println("3 - Multiplicação");
+        System.out.println("4 - Divisão");
+        System.out.print("Escolha a operação: ");
+        int operacao = scanner.nextInt();
 
-        do {
-            // Exibe o menu principal para o usuário
-            System.out.println("\n===== MENU PRINCIPAL =====");
-            System.out.println("1 - Calculadora Simples");
-            System.out.println("2 - Conversor de Temperatura");
-            System.out.println("3 - Verificador de Número Primo");
-            System.out.println("0 - Sair");
-            System.out.print("Escolha uma opção: ");
-            opcao = entrada.nextInt(); // Lê a opção digitada pelo usuário
-
-            // Executa uma ação com base na opção escolhida
-            switch (opcao) {
-                case 1:
-                    calculadora(entrada); // Chama o método da calculadora
-                    break;
-                case 2:
-                    conversorTemperatura(entrada); // Chama o método do conversor de temperatura
-                    break;
-                case 3:
-                    verificadorPrimo(entrada); // Chama o método do verificador de número primo
-                    break;
-                case 0:
-                    System.out.println("Encerrando o programa..."); // Mensagem ao sair do programa
-                    break;
-                default:
-                    System.out.println("Opção inválida."); // Caso o usuário digite uma opção não prevista
-            }
-        } while (opcao != 0); // Repete o menu enquanto a opção for diferente de zero
-
-        entrada.close(); 
-    }
-
-    
-    // EXERCÍCIO 1 - CALCULADORA SIMPLES
-    
-    public static void calculadora(Scanner entrada) {
         System.out.print("Digite o primeiro número: ");
-        double num1 = entrada.nextDouble(); // Lê o primeiro número
-
-        System.out.print("Digite a operação (+, -, *, /): ");
-        char operacao = entrada.next().charAt(0); // Lê o caractere da operação
+        double num1 = scanner.nextDouble();
 
         System.out.print("Digite o segundo número: ");
-        double num2 = entrada.nextDouble(); // Lê o segundo número
+        double num2 = scanner.nextDouble();
 
-        double resultado; // Variável para armazenar o resultado
+        double resultado = 0;
 
-        if (operacao == '+') { // Soma
-            resultado = num1 + num2;
-            System.out.println("Resultado: " + resultado);
-        } else if (operacao == '-') { // Subtração
-            resultado = num1 - num2;
-            System.out.println("Resultado: " + resultado);
-        } else if (operacao == '*') { // Multiplicação
-            resultado = num1 * num2;
-            System.out.println("Resultado: " + resultado);
-        } else if (operacao == '/') { // Divisão
-            if (num2 != 0) { // Evita divisão por zero
+        switch (operacao) {
+            case 1:
+                resultado = num1 + num2;
+                break;
+            case 2:
+                resultado = num1 - num2;
+                break;
+            case 3:
+                resultado = num1 * num2;
+                break;
+            case 4:
                 resultado = num1 / num2;
-                System.out.println("Resultado: " + resultado);
-            } else {
-                System.out.println("Erro: divisão por zero!");
-            }
-        } else { // Operação inválida
-            System.out.println("Operação inválida.");
+                break;
+            default:
+                System.out.println("Opção inválida.");
+                scanner.close();
+                return;
         }
-    }
+        
 
+        System.out.println("Resultado: " + resultado);
+        
+     // EXERCICIO 2 - CONVERSOR DE TEMPERATURA
     
-    // EXERCÍCIO 2 - CONVERSOR DE TEMPERATURA
-    
-    public static void conversorTemperatura(Scanner entrada) {
-        System.out.print("Digite a temperatura em Celsius: ");
-        double celsius = entrada.nextDouble(); // Lê a temperatura em Celsius
+        System.out.print("Digite a temperatura em graus Celsius: ");
+        double celsius = scanner.nextDouble();
 
-        // Converte para Fahrenheit
         double fahrenheit = (celsius * 9 / 5) + 32;
-        // Converte para Kelvin
         double kelvin = celsius + 273.15;
 
-        // Exibe os resultados das conversões
-        System.out.println("Temperatura em Fahrenheit: " + fahrenheit);
-        System.out.println("Temperatura em Kelvin: " + kelvin);
-    }
+        System.out.println("Temperatura em Fahrenheit: " + fahrenheit + " °F");
+        System.out.println("Temperatura em Kelvin: " + kelvin + " K");
+ 
+      // EXERCICIO 3 - VERIFICAR NUMERO PRIMO
+      
+      do {
+            System.out.print("Digite um número inteiro para verificar se é primo: ");
+            int numero = scanner.nextInt();
 
-    
-    // EXERCÍCIO 3 - VERIFICADOR DE NÚMERO PRIMO
-    
-    public static void verificadorPrimo(Scanner entrada) {
-        int numero; // Variável para armazenar o número que será verificado
-
-        System.out.println("=== Verificador de Números Primos ===");
-        System.out.println("Digite 0 para sair."); // Instrução para encerrar
-
-        while (true) {
-            System.out.print("Digite um número: ");
-            numero = entrada.nextInt(); // Lê o número digitado
-
-            if (numero == 0) { // Se for zero, encerra o loop e o programa
-                System.out.println("Programa encerrado.");
-                break;
-            }
-
-            if (numero < 2) { // Números menores que 2 não são primos
+            if (numero <= 1) {
                 System.out.println(numero + " não é primo.");
             } else {
-                boolean primo = true; // Assume que é primo até encontrar um divisor
-
-                // Verifica divisores até a raiz quadrada do número
+                boolean primo = true;
                 for (int i = 2; i <= Math.sqrt(numero); i++) {
-                    if (numero % i == 0) { // Se encontrar divisor, não é primo
+                    if (numero % i == 0) {
                         primo = false;
                         break;
                     }
                 }
 
-                // Exibe o resultado
                 if (primo) {
-                    System.out.println(numero + " é primo.");
+                    System.out.println(numero + " é primo!");
                 } else {
                     System.out.println(numero + " não é primo.");
                 }
             }
+
+            System.out.print("Deseja verificar outro número? (s/n): ");
+            continuar = scanner.next();
+        } while (continuar.equalsIgnoreCase("s"));
+      
+      // EXERCICIO 4 - CALCULADORA DE MEDIA
+      
+      double nota1, nota2, nota3, nota4, media;
+
+        System.out.print("Digite a primeira nota: ");
+        nota1 = scanner.nextDouble();
+
+        System.out.print("Digite a segunda nota: ");
+        nota2 = scanner.nextDouble();
+
+        System.out.print("Digite a terceira nota: ");
+        nota3 = scanner.nextDouble();
+
+        System.out.print("Digite a quarta nota: ");
+        nota4 = scanner.nextDouble();
+
+        media = (nota1 + nota2 + nota3 + nota4) / 4;
+        System.out.printf("A média das notas é: %.2f\n", media);
+        
+       // EXERCICIO 5 - TABUADA
+       System.out.print("Digite um número para ver sua tabuada: ");
+        int numero = scanner.nextInt();
+
+        System.out.println("Tabuada do " + numero + ":");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(numero + " x " + i + " = " + (numero * i));
         }
+        
+      // EXERCICIO 6 - DADOS DO USUARIO
+      
+System.out.println("\n=== Exercício 6 - Cadastro de Dados Pessoais ===");
+scanner.nextLine(); // Limpar o buffer antes de ler textos
+
+System.out.print("Digite seu nome: ");
+String nome = scanner.nextLine();
+
+System.out.print("Digite sua data de nascimento (dd/mm/aaaa): ");
+String dataNascimento = scanner.nextLine();
+
+System.out.print("Digite o nome do curso: ");
+String curso = scanner.nextLine();
+
+System.out.print("Digite a série: ");
+String serie = scanner.nextLine();
+
+// Solução: limpar o buffer antes de ler altura
+System.out.print("Digite sua altura (ex: 1.75): ");
+double altura = scanner.nextDouble();
+
+System.out.print("Digite seu peso (em kg): ");
+double peso = scanner.nextDouble();
+        
+     scanner.close();
     }
 }
-    
-
