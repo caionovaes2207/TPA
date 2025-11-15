@@ -6,7 +6,7 @@ package com.mycompany.atividadematrizes;
 
 /**
  *
- * @author Isabelly
+ * @author caio novaes
  */
  import java.util.Arrays;
  import java.util.Scanner;
